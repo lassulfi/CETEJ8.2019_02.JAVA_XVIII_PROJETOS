@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Chat xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../Schema/chat.xsd">
+  <Participante id="0" nome="Luis Daniel Assulfi"/>
+  <Participante id="1" nome="Marisa dos Santos Amaral"/>
+  <Mensagem>
+    <Data>2020-06-17</Data>
+    <Hora>21:13:00</Hora>
+    <Corpo>E aí? O que você está achando de criar arquivos xml?</Corpo>
+  </Mensagem>
+  <Mensagem>
+    <Data>2020-06-17</Data>
+    <Hora>21:14:00</Hora>
+    <Corpo>Eu estou adorando! E você?</Corpo>
+  </Mensagem>
+  <Mensagem>
+    <Data>2020-06-17</Data>
+    <Hora>21:15:00</Hora>
+    <Corpo>Eu também! Vamos estudar mais?</Corpo>
+  </Mensagem>
+  <Mensagem>
+    <Data>2020-06-17</Data>
+    <Hora>21:16:00</Hora>
+    <Corpo>Vamos sim!</Corpo>
+  </Mensagem>  
+</Chat>
