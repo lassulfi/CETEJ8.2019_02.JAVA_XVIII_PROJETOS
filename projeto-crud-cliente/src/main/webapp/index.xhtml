@@ -13,49 +13,54 @@
             <h:outputText value="Formulário de Cadastro"/>
         </f:facet>
         <h:form>
-            <h:outputLabel for="codigo" rendered="">Código</h:outputLabel>
-            <h:inputText id="codigo" value="" rendered=""/>
+            <h:outputLabel for="codigo" rendered="#{clienteBean.codigo == ''}">Código</h:outputLabel>
+            <h:inputText id="codigo" value="#{clienteBean.cliente.codigo}" 
+                        rendered="#{clienteBean.codigo == ''}"/>
             
-            <h:outputLabel rendered="">Código</h:outputLabel>
-            <h:outputText value="" rendered=""/>
+            <h:outputLabel rendered="#{clienteBean.codigo != ''}">Código</h:outputLabel>
+            <h:outputText value="#{clienteBean.cliente.codigo}" 
+                          rendered="#{clienteBean.codigo != ''}"/> <br />
             
             <h:outputLabel for="nome">Nome</h:outputLabel>
-            <h:inputText id="nome" value=""/>
+            <h:inputText id="nome" value="#{clienteBean.cliente.nome}"/> <br />
+            
             <h:outputLabel for="cidade">Cidade</h:outputLabel>
-            <h:selectOneMenu value="">
-                <f:selectItems value=""/>
-            </h:selectOneMenu>
+            <h:selectOneMenu id="cidade" value="#{clienteBean.cliente.cidade}">
+                <f:selectItems value="#{cidadeBean.cidades}"/>
+            </h:selectOneMenu> <br />
+            <h:commandButton id="submit" value="Cadastrar" action="#{clienteBean.save}"/>
         </h:form>
     </h:body>
-    <h2>Lista de Clientes</h2>
-    <h:dataTable value="" var="item" border="1" rendered="">
+    <h2>Clientes Cadastrados</h2>
+    <h:dataTable value="#{clienteBean.clientes}" var="item" border="1" rendered="">
         <h:column>
             <f:facet name="header"><h:outputText value="Código"/></f:facet>
-            <h:outputText value="#{item}" />
+            <h:outputText value="#{item.codigo}" />
         </h:column>
         <h:column>
             <f:facet name="header"><h:outputText value="Nome"/></f:facet>
-            <h:outputText value="#{item}" />
+            <h:outputText value="#{item.nome}" />
         </h:column>
         <h:column>
             <f:facet name="header"><h:outputText value="Cidade"/></f:facet>
-            <h:outputText value="#{item}" />
+            <h:outputText value="#{item.cidade.nome}" />
         </h:column>
         <h:column>
             <f:facet name="header"><h:outputText value="Editar"/></f:facet>
             <h:form>
-                <h:commandLink value="Editar" action="" styleClass="btn btn-sm"/>
+                <h:commandLink value="Editar" action="#{clienteBean.edit(item.codigo)}" 
+                               styleClass="btn btn-sm"/>
             </h:form>
         </h:column>
         <h:column>
             <f:facet name="header"><h:outputText value="Excluir"/></f:facet>
             <h:form>
-                <h:commandLink value="Excluir" action="" 
+                <h:commandLink value="Excluir" action="#{clienteBean.delete(item.codigo)}" 
                     onclick="if (!confirm('Você tem certeza que deseja excluir este cliente?')) {
                     return false;
                 }" styleClass="btn btn-sm"/>
             </h:form>
         </h:column>
-        <i><h:outputText value="Nenhum usuário cadastrado" rendered=""/></i>
+        <i><h:outputText value="Nenhum usuário cadastrado" rendered="#{clienteBean.clientes.size() == 0}"/></i>
     </h:dataTable>
 </html>

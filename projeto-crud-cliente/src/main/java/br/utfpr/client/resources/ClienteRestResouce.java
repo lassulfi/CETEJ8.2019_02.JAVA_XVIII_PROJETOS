@@ -22,7 +22,7 @@ public class ClienteRestResouce {
         webTarget = client.target(BASE_URI).path("clientes");
     }
 
-    public List<ICliente> getClientes(Class<List<ICliente>> responseType) throws ClientErrorException {
+    public List<ICliente> getClientes(Class<List> responseType) throws ClientErrorException {
         final WebTarget resource = this.webTarget;
         return resource.request(MediaType.APPLICATION_JSON).get(responseType);
     }

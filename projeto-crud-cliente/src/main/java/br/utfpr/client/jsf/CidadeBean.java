@@ -1,15 +1,14 @@
 package br.utfpr.client.jsf;
 
 import br.alerario.ICidade;
-import br.alerario.ICliente;
 import br.utfpr.client.resources.CidadeRestResource;
-
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
-import java.util.ArrayList;
 import java.util.List;
+import javax.enterprise.context.RequestScoped;
+import javax.faces.bean.ManagedBean;
+import javax.inject.Named;
 
 @Named(value = "cidadeBean")
+@ManagedBean
 @RequestScoped
 public class CidadeBean {
 
