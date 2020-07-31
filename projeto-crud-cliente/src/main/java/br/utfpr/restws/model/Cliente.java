@@ -2,8 +2,11 @@ package br.utfpr.restws.model;
 
 import br.alerario.ICidade;
 import br.alerario.ICliente;
+import java.io.Serializable;
 
-public class Cliente implements ICliente {
+public class Cliente implements ICliente, Serializable {
+    private static final long serialVersionUID = 1L;
+    
     private int codigo;
     private String nome;
     private ICidade cidade;

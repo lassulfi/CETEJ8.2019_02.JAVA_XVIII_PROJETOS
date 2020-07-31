@@ -2,14 +2,15 @@ package br.utfpr.client.jsf;
 
 import br.alerario.ICidade;
 import br.utfpr.client.resources.CidadeRestResource;
+import br.utfpr.restws.model.Cidade;
 import java.util.List;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Named;
 
 @Named(value = "cidadeBean")
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class CidadeBean {
 
     private ICidade cidade;
@@ -18,9 +19,9 @@ public class CidadeBean {
 
     }
 
-    public List<ICidade> getCidades() {
+    public List<Cidade> getCidades() {
         CidadeRestResource resource = new CidadeRestResource();
-        List<ICidade> cidades = resource.getCidades(List.class);
+        List<Cidade> cidades = resource.getCidades(List.class);
         resource.close();
 
         return cidades;

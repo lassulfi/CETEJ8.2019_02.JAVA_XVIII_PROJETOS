@@ -1,8 +1,11 @@
 package br.utfpr.restws.model;
 
 import br.alerario.ICidade;
+import java.io.Serializable;
 
-public class Cidade implements ICidade {
+public class Cidade implements ICidade, Serializable {
+    private static final long serialVersionUID = 1L;
+    
     private int codigo;
     private String nome;
 

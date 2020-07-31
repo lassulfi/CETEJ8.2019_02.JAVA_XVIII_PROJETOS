@@ -29,7 +29,7 @@ public class ClienteRestResouce {
 
     public ICliente getClientById(String id, Class<ICliente> responseType) throws ClientErrorException {
         final WebTarget resource = this.webTarget;
-        resource.path(MessageFormat.format("{0}", new Object[]{id}));
+        resource.path("/" + MessageFormat.format("{0}", new Object[]{id}));
         return resource.request(MediaType.APPLICATION_JSON).get(responseType);
     }
 
@@ -40,13 +40,16 @@ public class ClienteRestResouce {
 
     public void updateCliente(String id, ICliente requestEntity) throws ClientErrorException {
         final WebTarget resource = this.webTarget;
+        resource.path("/");
         resource.path(MessageFormat.format("{0}", new Object[]{id}));
         resource.request(MediaType.APPLICATION_JSON)
                 .put(Entity.entity(requestEntity, MediaType.APPLICATION_JSON));
     }
 
     public void deleteCliente(String id) throws ClientErrorException {
-        this.webTarget.path(MessageFormat.format("{0}", new Object[]{id})).request().delete();
+        final WebTarget resource = this.webTarget;
+        resource.path("/");
+        resource.path(MessageFormat.format("{0}", new Object[]{id})).request().delete();
     }
 
     public void close() {

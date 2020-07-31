@@ -25,8 +25,10 @@
             <h:inputText id="nome" value="#{clienteBean.cliente.nome}"/> <br />
             
             <h:outputLabel for="cidade">Cidade</h:outputLabel>
-            <h:selectOneMenu id="cidade" value="#{clienteBean.cliente.cidade}">
-                <f:selectItems value="#{cidadeBean.cidades}"/>
+            <h:selectOneMenu id="cidade" value="#{clienteBean.cliente.cidade}" converter="cidadeConverter">
+                <f:selectItem itemLabel="Selecione uma cidade: " itemValue="" />
+                <f:selectItems value="#{cidadeBean.cidades}" var="cidade" 
+                               itemValue="#{cidade}" itemLabel="#{cidade.codigo} - #{cidade.nome}"/>
             </h:selectOneMenu> <br />
             <h:commandButton id="submit" value="Cadastrar" action="#{clienteBean.save}"/>
         </h:form>

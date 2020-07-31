@@ -1,6 +1,8 @@
 package br.utfpr.client.resources;
 
 import br.alerario.ICidade;
+import br.utfpr.restws.model.Cidade;
+import java.text.MessageFormat;
 
 import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.client.Client;
@@ -20,8 +22,14 @@ public class CidadeRestResource {
         webTarget = client.target(BASE_URI).path("cidade");
     }
 
-    public List<ICidade> getCidades(Class<List> responseType) throws ClientErrorException {
+    public List<Cidade> getCidades(Class<List> responseType) throws ClientErrorException {
         WebTarget resource = this.webTarget;
+        return resource.request(MediaType.APPLICATION_JSON).get(responseType);
+    }
+    
+    public Cidade getById(String id, Class<Cidade> responseType) throws ClientErrorException {
+        final WebTarget resource = this.webTarget;
+        resource.path(MessageFormat.format("{0}", new Object[]{id}));
         return resource.request(MediaType.APPLICATION_JSON).get(responseType);
     }
 
