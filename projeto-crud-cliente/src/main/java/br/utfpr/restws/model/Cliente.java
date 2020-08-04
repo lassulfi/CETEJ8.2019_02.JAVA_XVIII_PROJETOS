@@ -3,7 +3,9 @@ package br.utfpr.restws.model;
 import br.alerario.ICidade;
 import br.alerario.ICliente;
 import java.io.Serializable;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 public class Cliente implements ICliente, Serializable {
     private static final long serialVersionUID = 1L;
     

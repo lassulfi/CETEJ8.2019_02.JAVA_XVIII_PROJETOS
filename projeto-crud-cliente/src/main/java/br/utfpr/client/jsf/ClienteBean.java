@@ -1,7 +1,10 @@
 package br.utfpr.client.jsf;
 
+import br.alerario.ICidade;
 import br.alerario.ICliente;
+import br.utfpr.client.resources.CidadeRestResource;
 import br.utfpr.client.resources.ClienteRestResouce;
+import br.utfpr.restws.model.Cidade;
 import br.utfpr.restws.model.Cliente;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -19,7 +22,9 @@ public class ClienteBean implements Serializable {
 
     private String codigo = "";
     private ICliente cliente;
-    private List<ICliente> clientes;
+    private List<Cliente> clientes;
+
+    private String cidade = "";
 
     public ClienteBean() {
         cliente = new Cliente();
@@ -54,19 +59,7 @@ public class ClienteBean implements Serializable {
         
         return "index.xhtml";
     }
-
-    private void saveCliente(ICliente cliente) {
-        ClienteRestResouce resouce = new ClienteRestResouce();
-        resouce.saveCliente(cliente);
-        resouce.close();
-    }
-
-    private void updateCliente(String codigo, ICliente cliente) {
-        ClienteRestResouce resouce = new ClienteRestResouce();
-        resouce.updateCliente(codigo, cliente);
-        resouce.close();
-    }
-
+    
     public String getCodigo() {
         return codigo;
     }
@@ -83,11 +76,48 @@ public class ClienteBean implements Serializable {
         this.cliente = cliente;
     }
 
-    public List<ICliente> getClientes() {
+    public List<Cliente> getClientes() {
         ClienteRestResouce resource = new ClienteRestResouce();
-        clientes = resource.getClientes(List.class);
+        clientes = resource.getClientes();
         resource.close();
         
         return clientes;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    private void saveCliente(ICliente cliente) {
+        cliente.setCidade(this.getCidadeByName());
+        ClienteRestResouce resouce = new ClienteRestResouce();
+        resouce.saveCliente(cliente);
+        resouce.close();
+    }
+
+    private void updateCliente(String codigo, ICliente cliente) {
+        cliente.setCidade(this.getCidadeByName());
+        ClienteRestResouce resouce = new ClienteRestResouce();
+        resouce.updateCliente(codigo, cliente);
+        resouce.close();
+    }
+
+    private ICidade getCidadeByName() {
+        CidadeRestResource resource = new CidadeRestResource();
+        List<Cidade> cidades = resource.getCidades();
+        resource.close();
+
+        for(ICidade c: cidades) {
+            System.out.println("getCidadeByName: " + c.getNome());
+            if(c.getNome().equals(this.cidade)) {
+                return c;
+            }
+        }
+        
+        return null;
     }
 }

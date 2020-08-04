@@ -10,12 +10,12 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="projeto-crud-cliente" target="1.8" />
+      <module name="projeto-crud-cliente" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="projeto-crud-cliente" options="-endorseddirs $PROJECT_DIR$/target/endorsed" />
+      <module name="projeto-crud-cliente" options="" />
     </option>
   </component>
 </project>

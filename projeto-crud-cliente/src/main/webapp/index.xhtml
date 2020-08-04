@@ -25,16 +25,16 @@
             <h:inputText id="nome" value="#{clienteBean.cliente.nome}"/> <br />
             
             <h:outputLabel for="cidade">Cidade</h:outputLabel>
-            <h:selectOneMenu id="cidade" value="#{clienteBean.cliente.cidade}" converter="cidadeConverter">
+            <h:selectOneMenu id="cidade" value="#{clienteBean.cidade}">
                 <f:selectItem itemLabel="Selecione uma cidade: " itemValue="" />
                 <f:selectItems value="#{cidadeBean.cidades}" var="cidade" 
-                               itemValue="#{cidade}" itemLabel="#{cidade.codigo} - #{cidade.nome}"/>
+                               itemValue="#{cidade.nome}" itemLabel="#{cidade.nome}"/>
             </h:selectOneMenu> <br />
             <h:commandButton id="submit" value="Cadastrar" action="#{clienteBean.save}"/>
         </h:form>
     </h:body>
     <h2>Clientes Cadastrados</h2>
-    <h:dataTable value="#{clienteBean.clientes}" var="item" border="1" rendered="">
+    <h:dataTable value="#{clienteBean.clientes}" var="item" border="1" rendered="#{clienteBean.clientes.size() != 0}">
         <h:column>
             <f:facet name="header"><h:outputText value="Código"/></f:facet>
             <h:outputText value="#{item.codigo}" />
@@ -63,6 +63,6 @@
                 }" styleClass="btn btn-sm"/>
             </h:form>
         </h:column>
-        <i><h:outputText value="Nenhum usuário cadastrado" rendered="#{clienteBean.clientes.size() == 0}"/></i>
     </h:dataTable>
+    <i><h:outputText value="Nenhum cliente cadastrado" rendered="#{clienteBean.clientes.size() == 0}"/></i>
 </html>

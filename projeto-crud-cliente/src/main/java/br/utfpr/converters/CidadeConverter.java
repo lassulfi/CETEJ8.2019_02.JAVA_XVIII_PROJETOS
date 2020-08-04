@@ -9,11 +9,13 @@ import br.alerario.ICidade;
 import br.utfpr.client.resources.CidadeRestResource;
 import br.utfpr.restws.model.Cidade;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.ws.rs.core.GenericType;
 
 /**
  *
@@ -29,10 +31,10 @@ public class CidadeConverter implements Converter, Serializable{
             String id = value.split("-")[0].trim();
             System.out.println("Index of element in the combobox: " + id);
             CidadeRestResource resource = new CidadeRestResource();
-            List<Cidade> cidades = resource.getCidades(List.class);
+            List<Cidade> cidades = resource.getCidades();
             resource.close();
             
-            Cidade cidade = cidades.stream()
+            ICidade cidade = cidades.stream()
                     .filter(c -> String.valueOf(c.getCodigo()).equals(id))
                     .findFirst().orElse(null);
                                   

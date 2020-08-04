@@ -1,14 +1,17 @@
 package br.utfpr.client.resources;
 
 import br.alerario.ICliente;
+import br.utfpr.restws.model.Cliente;
 
 import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ClienteRestResouce {
@@ -22,9 +25,9 @@ public class ClienteRestResouce {
         webTarget = client.target(BASE_URI).path("clientes");
     }
 
-    public List<ICliente> getClientes(Class<List> responseType) throws ClientErrorException {
+    public List<Cliente> getClientes() throws ClientErrorException {
         final WebTarget resource = this.webTarget;
-        return resource.request(MediaType.APPLICATION_JSON).get(responseType);
+        return resource.request(MediaType.APPLICATION_JSON).get(new GenericType<List<Cliente>>(){});
     }
 
     public ICliente getClientById(String id, Class<ICliente> responseType) throws ClientErrorException {

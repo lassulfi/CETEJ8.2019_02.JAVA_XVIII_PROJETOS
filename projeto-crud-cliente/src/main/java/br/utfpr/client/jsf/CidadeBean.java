@@ -3,6 +3,7 @@ package br.utfpr.client.jsf;
 import br.alerario.ICidade;
 import br.utfpr.client.resources.CidadeRestResource;
 import br.utfpr.restws.model.Cidade;
+
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -21,7 +22,7 @@ public class CidadeBean {
 
     public List<Cidade> getCidades() {
         CidadeRestResource resource = new CidadeRestResource();
-        List<Cidade> cidades = resource.getCidades(List.class);
+        List<Cidade> cidades = resource.getCidades();
         resource.close();
 
         return cidades;

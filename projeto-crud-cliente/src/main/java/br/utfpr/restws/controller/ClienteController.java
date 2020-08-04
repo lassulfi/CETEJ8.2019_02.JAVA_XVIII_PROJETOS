@@ -2,6 +2,7 @@ package br.utfpr.restws.controller;
 
 import br.alerario.ICliente;
 import br.utfpr.restws.controller.exceptions.DataIntegrityException;
+import br.utfpr.restws.model.Cliente;
 import br.utfpr.restws.repository.ClienteRepository;
 import br.utfpr.restws.repository.exceptions.ClienteNotFoundException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -43,9 +44,10 @@ public class ClienteController {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public void createCliente(String content) throws DataIntegrityException {
+        System.out.println("Create client: " + content);
         ObjectMapper mapper = new ObjectMapper();
         try {
-            final ICliente cliente = mapper.readValue(content, ICliente.class);
+            final ICliente cliente = mapper.readValue(content, Cliente.class);
             this.repository.save(cliente);
         } catch (IOException e) {
            throw new DataIntegrityException("Erro na estrutura de dados");
@@ -59,7 +61,7 @@ public class ClienteController {
             ClienteNotFoundException {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            final ICliente cliente = mapper.readValue(content, ICliente.class);
+            final ICliente cliente = mapper.readValue(content, Cliente.class);
             this.repository.update(id, cliente);
         } catch (IOException e) {
             throw new DataIntegrityException("Erro na estrutura de dados");
