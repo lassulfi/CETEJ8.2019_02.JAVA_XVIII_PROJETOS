@@ -1,8 +1,8 @@
 package br.utfpr.client.resources;
 
-import br.alerario.ICliente;
 import br.utfpr.restws.model.Cliente;
-
+import java.text.MessageFormat;
+import java.util.List;
 import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -10,9 +10,6 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ClienteRestResouce {
 
@@ -26,12 +23,12 @@ public class ClienteRestResouce {
     }
 
     public List<Cliente> getClientes() throws ClientErrorException {
-        final WebTarget resource = this.webTarget;
+        WebTarget resource = this.webTarget;
         return resource.request(MediaType.APPLICATION_JSON).get(new GenericType<List<Cliente>>(){});
     }
 
     public Cliente getClientById(String id) throws ClientErrorException {
-        final WebTarget resource = this.webTarget;
+        WebTarget resource = this.webTarget;
         resource.path("/" + MessageFormat.format("{0}", new Object[]{id}));
         return resource.request(MediaType.APPLICATION_JSON).get(Cliente.class);
     }
@@ -42,17 +39,14 @@ public class ClienteRestResouce {
     }
 
     public void updateCliente(String id, Cliente requestEntity) throws ClientErrorException {
-        final WebTarget resource = this.webTarget;
-        resource.path("/");
-        resource.path(MessageFormat.format("{0}", new Object[]{id}));
-        resource.request(MediaType.APPLICATION_JSON)
+        WebTarget resource = this.webTarget.path("/" + MessageFormat.format("{0}", new Object[]{id}));
+        resource.request()
                 .put(Entity.entity(requestEntity, MediaType.APPLICATION_JSON));
     }
 
     public void deleteCliente(String id) throws ClientErrorException {
-        final WebTarget resource = this.webTarget;
-        resource.path("/");
-        resource.path(MessageFormat.format("{0}", new Object[]{id})).request().delete();
+        WebTarget resource = this.webTarget.path("/" + MessageFormat.format("{0}", new Object[]{id}));
+        resource.request().delete();
     }
 
     public void close() {

@@ -2,7 +2,6 @@ package br.utfpr.restws.model;
 
 import br.alerario.ICidade;
 import java.io.Serializable;
-import javax.xml.bind.annotation.XmlRootElement;
 
 public class Cidade implements ICidade, Serializable {
     private static final long serialVersionUID = 1L;

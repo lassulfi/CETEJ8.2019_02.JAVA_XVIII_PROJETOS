@@ -1,19 +1,14 @@
 package br.utfpr.restws.controller;
 
-import br.alerario.ICliente;
-import br.utfpr.restws.controller.exceptions.DataIntegrityException;
 import br.utfpr.restws.model.Cliente;
 import br.utfpr.restws.repository.ClienteRepository;
 import br.utfpr.restws.repository.exceptions.ClienteNotFoundException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
+import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
-import java.io.IOException;
-import java.util.List;
 
 @Path("clientes")
 @RequestScoped
@@ -51,7 +46,7 @@ public class ClienteController {
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     public void updateCliente(@PathParam("id") int id, Cliente cliente) throws ClienteNotFoundException {
-        this.repository.update(cliente);
+        this.repository.update(id, cliente);
     }
 
     @DELETE

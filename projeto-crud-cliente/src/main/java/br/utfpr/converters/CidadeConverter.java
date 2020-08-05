@@ -9,13 +9,11 @@ import br.alerario.ICidade;
 import br.utfpr.client.resources.CidadeRestResource;
 import br.utfpr.restws.model.Cidade;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.ws.rs.core.GenericType;
 
 /**
  *

@@ -1,9 +1,7 @@
 package br.utfpr.client.resources;
 
-import br.alerario.ICidade;
 import br.utfpr.restws.model.Cidade;
 import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.client.Client;

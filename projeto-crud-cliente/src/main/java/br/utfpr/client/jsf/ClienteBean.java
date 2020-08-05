@@ -1,7 +1,5 @@
 package br.utfpr.client.jsf;
 
-import br.alerario.ICidade;
-import br.alerario.ICliente;
 import br.utfpr.client.resources.CidadeRestResource;
 import br.utfpr.client.resources.ClienteRestResouce;
 import br.utfpr.restws.model.Cidade;
@@ -11,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-
 import javax.inject.Named;
 
 @Named(value = "clienteBean")

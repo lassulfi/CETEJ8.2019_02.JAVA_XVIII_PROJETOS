@@ -1,9 +1,7 @@
 package br.utfpr.restws.repository;
 
-import br.alerario.ICliente;
-import br.utfpr.restws.repository.exceptions.ClienteNotFoundException;
 import br.utfpr.restws.model.Cliente;
-
+import br.utfpr.restws.repository.exceptions.ClienteNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,11 +15,12 @@ public class ClienteRepository {
         clientes.add(cliente);
     }
 
-    public void update(Cliente cliente) throws ClienteNotFoundException {
-        Cliente entity = this.findById(cliente.getCodigo());
+    public void update(int id, Cliente cliente) throws ClienteNotFoundException {
+        Cliente entity = this.findById(id);
         if(entity != null) {
             entity.setCidade(cliente.getCidade());
             entity.setNome(cliente.getNome());
+            this.clientes.set(id, entity);
         } else {
             throw new ClienteNotFoundException("Cliente não encontrado. Id = " + cliente.getCodigo());
         }
