@@ -21,7 +21,7 @@ public class ClienteBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String codigo = "";
-    private ICliente cliente;
+    private Cliente cliente;
     private List<Cliente> clientes;
 
     private String cidade = "";
@@ -44,12 +44,14 @@ public class ClienteBean implements Serializable {
     }
     
     public void edit(int codigo) {
-        String codigoStr = String.valueOf(codigo);
         ClienteRestResouce resource = new ClienteRestResouce();
-        cliente = resource.getClientById(codigoStr, ICliente.class);
+        List<Cliente> clientes = resource.getClientes();
         resource.close();
         
-        this.codigo = String.valueOf(cliente.getCodigo());
+        this.cliente = clientes.stream().filter(c -> c.getCodigo() == codigo).findFirst().orElse(null);
+        this.cidade = this.cliente.getCidade().getNome();
+        
+        this.codigo = String.valueOf(this.cliente.getCodigo());
     }
     
     public String delete(String codigo) {
@@ -68,11 +70,11 @@ public class ClienteBean implements Serializable {
         this.codigo = codigo;
     }
     
-    public ICliente getCliente() {
+    public Cliente getCliente() {
         return cliente;
     }
 
-    public void setCliente(ICliente cliente) {
+    public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
 
@@ -92,32 +94,25 @@ public class ClienteBean implements Serializable {
         this.cidade = cidade;
     }
 
-    private void saveCliente(ICliente cliente) {
+    private void saveCliente(Cliente cliente) {
         cliente.setCidade(this.getCidadeByName());
         ClienteRestResouce resouce = new ClienteRestResouce();
         resouce.saveCliente(cliente);
         resouce.close();
     }
 
-    private void updateCliente(String codigo, ICliente cliente) {
+    private void updateCliente(String codigo, Cliente cliente) {
         cliente.setCidade(this.getCidadeByName());
         ClienteRestResouce resouce = new ClienteRestResouce();
         resouce.updateCliente(codigo, cliente);
         resouce.close();
     }
 
-    private ICidade getCidadeByName() {
+    private Cidade getCidadeByName() {
         CidadeRestResource resource = new CidadeRestResource();
         List<Cidade> cidades = resource.getCidades();
         resource.close();
-
-        for(ICidade c: cidades) {
-            System.out.println("getCidadeByName: " + c.getNome());
-            if(c.getNome().equals(this.cidade)) {
-                return c;
-            }
-        }
         
-        return null;
+        return cidades.stream().filter(c -> c.getNome().equals(this.cidade)).findFirst().orElse(null);
     }
 }

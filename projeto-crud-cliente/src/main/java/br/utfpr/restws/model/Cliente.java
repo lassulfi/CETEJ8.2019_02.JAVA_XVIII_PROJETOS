@@ -1,54 +1,44 @@
 package br.utfpr.restws.model;
 
-import br.alerario.ICidade;
-import br.alerario.ICliente;
 import java.io.Serializable;
-import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
-public class Cliente implements ICliente, Serializable {
+public class Cliente implements Serializable {
     private static final long serialVersionUID = 1L;
     
     private int codigo;
     private String nome;
-    private ICidade cidade;
+    private Cidade cidade;
 
     public Cliente() {
     }
 
-    public Cliente(int codigo, String nome, ICidade cidade) {
+    public Cliente(int codigo, String nome, Cidade cidade) {
         this.codigo = codigo;
         this.nome = nome;
         this.cidade = cidade;
     }
 
-    @Override
     public int getCodigo() {
         return this.codigo;
     }
 
-    @Override
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
-
-    @Override
+    
     public String getNome() {
         return this.nome;
     }
 
-    @Override
     public void setNome(String nome) {
         this.nome = nome;
     }
 
-    @Override
-    public ICidade getCidade() {
+    public Cidade getCidade() {
         return this.cidade;
     }
 
-    @Override
-    public void setCidade(ICidade cidade) {
+    public void setCidade(Cidade cidade) {
         this.cidade = cidade;
     }
 }

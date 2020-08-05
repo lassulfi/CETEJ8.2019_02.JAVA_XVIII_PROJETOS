@@ -30,42 +30,28 @@ public class ClienteController {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<ICliente> getAllClientes() {
+    public List<Cliente> getAllClientes() {
         return this.repository.getAll();
     }
 
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public ICliente getClienteById(@PathParam("id") int id) {
+    public Cliente getClienteById(@PathParam("id") int id) {
         return this.repository.findById(id);
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void createCliente(String content) throws DataIntegrityException {
-        System.out.println("Create client: " + content);
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            final ICliente cliente = mapper.readValue(content, Cliente.class);
-            this.repository.save(cliente);
-        } catch (IOException e) {
-           throw new DataIntegrityException("Erro na estrutura de dados");
-        }
+    public void createCliente(Cliente cliente) {
+        this.repository.save(cliente);
     }
 
     @PUT
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void updateCliente(@PathParam("id") int id, String content) throws DataIntegrityException,
-            ClienteNotFoundException {
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            final ICliente cliente = mapper.readValue(content, Cliente.class);
-            this.repository.update(id, cliente);
-        } catch (IOException e) {
-            throw new DataIntegrityException("Erro na estrutura de dados");
-        }
+    public void updateCliente(@PathParam("id") int id, Cliente cliente) throws ClienteNotFoundException {
+        this.repository.update(cliente);
     }
 
     @DELETE

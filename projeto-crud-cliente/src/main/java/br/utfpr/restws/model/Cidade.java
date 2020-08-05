@@ -4,7 +4,6 @@ import br.alerario.ICidade;
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
 public class Cidade implements ICidade, Serializable {
     private static final long serialVersionUID = 1L;
     
@@ -12,11 +11,6 @@ public class Cidade implements ICidade, Serializable {
     private String nome;
 
     public Cidade() {
-    }
-
-    public Cidade(int codigo, String nome) {
-        this.codigo = codigo;
-        this.nome = nome;
     }
 
     @Override

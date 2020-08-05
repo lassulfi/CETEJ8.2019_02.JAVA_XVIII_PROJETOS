@@ -30,18 +30,18 @@ public class ClienteRestResouce {
         return resource.request(MediaType.APPLICATION_JSON).get(new GenericType<List<Cliente>>(){});
     }
 
-    public ICliente getClientById(String id, Class<ICliente> responseType) throws ClientErrorException {
+    public Cliente getClientById(String id) throws ClientErrorException {
         final WebTarget resource = this.webTarget;
         resource.path("/" + MessageFormat.format("{0}", new Object[]{id}));
-        return resource.request(MediaType.APPLICATION_JSON).get(responseType);
+        return resource.request(MediaType.APPLICATION_JSON).get(Cliente.class);
     }
 
-    public void saveCliente(ICliente requestEntity) throws ClientErrorException {
+    public void saveCliente(Cliente requestEntity) throws ClientErrorException {
         webTarget.request(MediaType.APPLICATION_JSON)
                 .post(Entity.entity(requestEntity, MediaType.APPLICATION_JSON));
     }
 
-    public void updateCliente(String id, ICliente requestEntity) throws ClientErrorException {
+    public void updateCliente(String id, Cliente requestEntity) throws ClientErrorException {
         final WebTarget resource = this.webTarget;
         resource.path("/");
         resource.path(MessageFormat.format("{0}", new Object[]{id}));
